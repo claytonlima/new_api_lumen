@@ -10,7 +10,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 $app->get('/', function () use ($app) {
     return $app->version();
@@ -24,12 +24,11 @@ $app->group(['prefix'=>'api'], function () use ($app){
     $app->delete('/users/{id}', 'Api\UsersController@destroy');
 });
 
-
-//$app->group(['prefix'=>'api2'], function () use ($app){
-//    $app->post('/users', function (Request $request){
-//        $data = $request->all();
-//        $data['password'] = \Hash::make($data['password']);
-//        $model1 = \App\User::create($data);
-//        return response()->json($model1, 201);
-//    });
-//});
+$app->group(['prefix'=>'api2'], function () use ($app){
+    $app->post('/users', function (Request $request){
+        $data = $request->all();
+        $data['password'] = \Hash::make($data['password']);
+        $model1 = \App\User::create($data);
+        return response()->json($model1, 201);
+    });
+});
