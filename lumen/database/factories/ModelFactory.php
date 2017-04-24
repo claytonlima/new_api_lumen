@@ -12,11 +12,9 @@
 */
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
-static $password;
-
     return [
         'name' => $faker->name,
         'email' => $faker->email,
-        'password'=> $password ?: $password = app('hash')->make('secret'),
+        'password'=> \Hash::make('secret')
    ];
 });

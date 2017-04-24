@@ -25,7 +25,9 @@ $app = new Laravel\Lumen\Application(
 
 $app->configure('cors');
 
-$app->withFacades();
+$app->withFacades(true, [
+    \Illuminate\Support\Facades\Hash::class => 'Hash'
+]);
 
 $app->withEloquent();
 
