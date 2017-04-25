@@ -26,6 +26,12 @@ $app->group(['prefix'=>'api'], function () use ($app){
 
 $app->group(['prefix'=>'api2'], function () use ($app){
     $app->post('/users', function (Request $request){
+        $this->validate($request, [
+            'name'      =>  'required',
+            'email'     =>  'required|email|unique:users',
+            'password'  =>  'required|min:8|max:10|confirmed'
+        ]);
+
         $data = $request->all();
         $data['password'] = \Hash::make($data['password']);
         $model1 = \App\User::create($data);
